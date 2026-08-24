@@ -1,0 +1,1139 @@
+<!DOCTYPE html><html lang="en">
+<head>
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self' 'unsafe-inline' 'unsafe-eval' data: blob: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://code.jquery.com https://unpkg.com https://d3js.org https://threejs.org https://cdn.plot.ly https://stackpath.bootstrapcdn.com https://maps.googleapis.com https://cdn.tailwindcss.com https://ajax.googleapis.com https://kit.fontawesome.com https://cdn.datatables.net https://maxcdn.bootstrapcdn.com https://code.highcharts.com https://tako-static-assets-production.s3.amazonaws.com https://www.youtube.com https://fonts.googleapis.com https://fonts.gstatic.com https://pfst.cf2.poecdn.net https://puc.poecdn.net https://i.imgur.com https://wikimedia.org https://*.icons8.com https://*.giphy.com https://picsum.photos https://images.unsplash.com; frame-src 'self' https://www.youtube.com https://trytako.com; child-src 'self'; manifest-src 'self'; worker-src 'self'; upgrade-insecure-requests; block-all-mixed-content;">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Prof. Yanmin Zhu | Computational Imaging &amp; Intelligent Photonics | HKU</title>
+  <meta name="description" content="Prof. Yanmin Zhu, Presidential Research Assistant Professor at The University of Hong Kong (ECE / School of Biomedical Engineering). Computational imaging, intelligent photonics, physics-informed generative AI, AI for healthcare and environment.">
+  <meta name="keywords" content="Yanmin Zhu, HKU, computational imaging, digital holography, polarization imaging, physics-informed AI, SpectroGen, microplastics, nanoplastics, optical computing">
+
+  <!-- ===== Open Graph (社交分享卡片) ===== -->
+  <meta property="og:title" content="Prof. Yanmin Zhu — Computational Imaging &amp; Intelligent Photonics, HKU">
+  <meta property="og:description" content="Presidential Research Assistant Professor, HKU. Physics-informed generative AI, holography, and photonic sensing for health, environment and materials.">
+  <meta property="og:type" content="website">
+
+  <style>
+  /* ============================================================
+    DESIGN TOKENS
+    ============================================================ */
+  :root{
+    --ink:#0f1720;          /* 主文字 */
+    --ink-soft:#4a5967;     /* 次要文字 */
+    --muted:#718096;
+    --line:#e6eaf0;
+    --bg:#ffffff;
+    --bg-soft:#f5f7f9;
+    --brand:#1d2d39;        /* 深石墨 */
+    --brand-2:#4f6b7a;      /* 冷蓝灰 */
+    --brand-3:#9ab3bf;      /* 光学二次色 */
+    --accent:#b7945a;       /* 经典金铜：专业感 */
+    --accent-soft:#d7c49a;
+    --optic:#a8d6d1;        /* 轻微光学蓝绿 */
+    --hot:#8f3d2f;          /* 低饱和红棕 */
+    --radius:14px;
+    --shadow:0 6px 24px rgba(15,23,32,.08);
+    --shadow-lg:0 18px 50px rgba(15,23,32,.14);
+    --sidebar-w:270px;
+    --maxw:960px;
+    --serif:"Iowan Old Style","Palatino Linotype",Palatino,Georgia,"Times New Roman",serif;
+    --sans:-apple-system,BlinkMacSystemFont,"Segoe UI","Helvetica Neue","PingFang SC","Microsoft YaHei",Arial,sans-serif;
+  }
+
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth;scroll-padding-top:70px}
+  body{
+    margin:0;font-family:var(--sans);color:var(--ink);background:var(--bg);
+    line-height:1.42;-webkit-font-smoothing:antialiased;font-size:15.2px;
+  }
+  a{color:var(--brand);text-decoration:none}
+  a:hover{text-decoration:underline}
+  a.mentor-link{color:#2563eb}
+  a.project-link{color:#2563eb;text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:2px}
+  a.project-link:hover{color:#0b4f8a}
+  img{max-width:100%;display:block}
+
+  /* ============================================================
+    LAYOUT: fixed sidebar + content (luvision-like)
+    ============================================================ */
+  .layout{display:flex;min-height:100vh}
+
+  .sidebar{
+    width:var(--sidebar-w);flex:0 0 var(--sidebar-w);
+    position:sticky;top:0;height:100vh;overflow-y:auto;
+    background:linear-gradient(180deg,#111a23 0%,#1a2a35 42%,#253c49 100%);
+    color:#edf3f6;padding:26px 20px 30px;
+    box-shadow:inset -1px 0 0 rgba(255,255,255,.08);
+  }
+  .sidebar::-webkit-scrollbar{width:6px}
+  .sidebar::-webkit-scrollbar-thumb{background:rgba(255,255,255,.22);border-radius:3px}
+
+  .avatar-wrap{text-align:center}
+  .avatar{
+    width:132px;height:132px;border-radius:50%;margin:0 auto 12px;
+    object-fit:cover;border:3px solid rgba(255,255,255,.6);
+    box-shadow:0 8px 26px rgba(0,0,0,.30);background:#123;
+  }
+  .avatar-fallback{
+    width:132px;height:132px;border-radius:50%;margin:0 auto 12px;
+    display:flex;align-items:center;justify-content:center;
+    font-family:var(--serif);font-size:46px;letter-spacing:1px;
+    background:linear-gradient(135deg,#a8d6d1,#4f6b7a 55%,#d4b07e);
+    border:3px solid rgba(255,255,255,.5);box-shadow:0 8px 26px rgba(0,0,0,.30);
+  }
+  .side-name{font-family:var(--serif);font-size:21px;line-height:1.25;margin:6px 0 2px;color:#fff}
+  .side-cn{font-size:13px;color:#c9d9e2;margin-bottom:10px}
+  .side-role{font-size:12.5px;color:#dfeaf0;border-top:1px solid rgba(255,255,255,.15);padding-top:10px;margin-top:8px}
+  .side-role b{color:#f8f0e5;font-weight:600}
+
+  nav.side-nav{margin-top:18px}
+  nav.side-nav a{
+    display:block;color:#dfeaf0;font-size:13.4px;padding:6px 10px;border-radius:8px;
+    border-left:2px solid transparent;transition:.18s;text-decoration:none;
+  }
+  nav.side-nav a:hover,nav.side-nav a.active{
+    background:rgba(255,255,255,.08);color:#fff;border-left-color:var(--accent);
+  }
+  .side-links{margin-top:18px;display:flex;flex-wrap:wrap;gap:6px}
+  .side-links a{
+    font-size:11.5px;padding:4px 9px;border:1px solid rgba(255,255,255,.25);
+    border-radius:20px;color:#edf5f8;text-decoration:none;background:rgba(255,255,255,.03);
+  }
+  .side-links .fa{width:13px;height:13px;margin-right:4px;vertical-align:-2px}
+  .side-links a:hover{background:#f5efe7;color:var(--brand);border-color:#f5efe7;text-decoration:none}
+  .side-foot{margin-top:20px;font-size:11px;color:#b7c9d3;line-height:1.5}
+
+  .content{flex:1;min-width:0}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 30px}
+
+  /* mobile top bar */
+  .mobilebar{display:none}
+
+  /* ============================================================
+    HERO
+    ============================================================ */
+  .hero{
+    position:relative;color:#fff;overflow:hidden;
+    background:
+      radial-gradient(900px 420px at 15% -10%,rgba(168,214,209,.18),transparent 55%),
+      radial-gradient(700px 380px at 92% 20%,rgba(183,148,90,.22),transparent 62%),
+      linear-gradient(120deg,#111b24 0%,#1a2a35 35%,#2a3d4d 100%);
+  }
+  .hero::before{
+    content:"";position:absolute;inset:0;
+    background:
+      radial-gradient(circle at 30% 35%, rgba(255,255,255,.14) 0 2px, transparent 3px),
+      radial-gradient(circle at 50% 50%, rgba(168,214,209,.18) 0 1px, transparent 2px),
+      repeating-radial-gradient(circle at 35% 45%, rgba(255,255,255,.06) 0 1px, transparent 1px 18px);
+    opacity:.75;pointer-events:none;
+  }
+  .hero::after{
+    content:"";position:absolute;inset:0;opacity:.12;
+    background-image:
+      repeating-linear-gradient(110deg, rgba(255,255,255,.4) 0 1px, transparent 1px 14px),
+      repeating-linear-gradient(20deg, rgba(168,214,209,.35) 0 1px, transparent 1px 16px);
+    pointer-events:none;
+  }
+  .hero-inner{position:relative;z-index:2;padding:50px 0 36px}
+  .eyebrow{
+    display:inline-block;font-size:11.2px;letter-spacing:2.1px;text-transform:uppercase;
+    color:#d9c29d;border:1px solid rgba(217,194,157,.45);padding:4px 11px;border-radius:20px;margin-bottom:14px;
+    background:rgba(255,255,255,.04);
+  }
+  h1.hero-name{font-family:var(--serif);font-size:clamp(32px,4.3vw,46px);line-height:1.08;margin:0 0 6px;font-weight:600}
+  .hero-cn{font-size:16px;color:#cddfe8;margin-bottom:12px}
+  .hero-titles{font-size:15px;color:#edf3f8;max-width:760px}
+  .hero-titles div{margin:3px 0}
+  .hero-titles .b{color:#d7c49a;font-weight:600}
+  .hero-tags{margin-top:16px;display:flex;flex-wrap:wrap;gap:8px}
+  .tag{
+    font-size:12px;padding:5px 11px;border-radius:20px;
+    background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.2);color:#f1f6f9;
+  }
+  .hero-cta{margin-top:22px;display:flex;flex-wrap:wrap;gap:10px}
+  .btn{
+    display:inline-block;padding:9px 18px;border-radius:24px;font-size:13.3px;font-weight:600;
+    text-decoration:none;transition:.18s;border:1.5px solid transparent;
+  }
+  .btn-solid{background:#d7c49a;color:#1a2a35}
+  .btn-solid:hover{background:#f3e7c8;text-decoration:none;transform:translateY(-1px)}
+  .btn-ghost{border-color:rgba(255,255,255,.45);color:#fff;background:rgba(255,255,255,.02)}
+  .btn-ghost:hover{background:#fff;color:var(--brand);text-decoration:none}
+
+  /* STATS BAR */
+  .stats{
+    background:#1a2a35;color:#fff;border-top:1px solid rgba(255,255,255,.10);
+  }
+  .stats-grid{
+    display:grid;grid-template-columns:repeat(6,1fr);gap:0;
+    max-width:var(--maxw);margin:0 auto;
+  }
+  .stat{padding:18px 12px;text-align:center;border-right:1px solid rgba(255,255,255,.10)}
+  .stat:last-child{border-right:none}
+  .stat .n{font-family:var(--serif);font-size:28px;line-height:1;color:#d7c49a;display:block}
+  .stat .l{font-size:11px;letter-spacing:.5px;color:#c7d7e0;margin-top:5px;display:block;text-transform:uppercase}
+
+  /* ============================================================
+    SECTIONS
+    ============================================================ */
+  section{padding:40px 0}
+  section.alt{background:var(--bg-soft);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+  .sec-head{margin-bottom:20px}
+  .sec-kicker{font-size:11.2px;letter-spacing:2px;text-transform:uppercase;color:var(--brand-2);font-weight:700}
+  h2{font-family:var(--serif);font-size:27px;margin:6px 0 8px;font-weight:600;color:var(--ink)}
+  h2 .rule{display:block;width:52px;height:3px;background:var(--accent);margin-top:10px;border-radius:2px}
+  .sec-sub{color:var(--ink-soft);max-width:820px; margin-top:0;}
+
+  h3{font-size:16.5px;margin:18px 0 10px;color:var(--ink)}
+  h3 .badge-year{font-size:12px;color:var(--muted);font-weight:400;margin-left:8px}
+
+  /* CARDS */
+  .grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+  .grid-2{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
+  .card{
+    background:#fff;border:1px solid var(--line);border-radius:var(--radius);
+    padding:18px 18px 16px;box-shadow:var(--shadow);transition:.2s;
+  }
+  .card:hover{transform:translateY(-2px);box-shadow:var(--shadow-lg);border-color:#c9dcec}
+  .company-photo{object-fit:contain;border-radius:8px;margin-bottom:14px;background:var(--bg-soft)}
+  .spectrogen-photo{width:50%}
+  .holosense-photo{width:25%}
+  .card .ic{
+    width:38px;height:38px;border-radius:10px;display:flex;align-items:center;justify-content:center;
+    background:linear-gradient(135deg,#0d8ba1,#0b4f8a);color:#fff;font-size:17px;margin-bottom:10px;
+  }
+  .research-card-image{
+    display:block;width:100%;height:150px;object-fit:contain;
+    margin:0 auto 14px;border-radius:8px;background:var(--bg-soft);
+  }
+  .research-card-image.imaging{width:95%;height:150px;max-width:none;object-fit:cover;
+    background:transparent;border:0;}
+  .research-card-image.optical-computing{width:90%;height:150px;max-width:none;object-fit:cover;
+    background:transparent;border:0;}
+  .research-card-image.generative-ai{width:100%;height:150px;max-width:none;object-fit:cover;
+    background:transparent;border:0;}
+  .research-card-image.healthcare{width:95%;height:135px;max-width:none;object-fit:cover;
+    background:transparent;border:0;}
+  .research-card-image.environment{width:90%;height:135px;max-width:none;object-fit:cover;
+    background:transparent;border:0;}
+  .research-card-image.materials{
+    width:90%;height:135px;max-width:none;object-fit:cover;
+    background:transparent;border:0;
+  }
+  .card h4{margin:0 0 8px;font-size:16.2px}
+  .card p{margin:0;font-size:14px;color:var(--ink-soft)}
+  .card ul{margin:10px 0 0;padding-left:18px;font-size:13.5px;color:var(--ink-soft)}
+  .card ul li{margin:4px 0}
+
+  /* HIGHLIGHT / FEATURED WORKS */
+  .feature{
+    display:flex;gap:16px;align-items:flex-start;background:#fff;border:1px solid var(--line);
+    border-left:4px solid var(--hot);border-radius:12px;padding:15px 18px;margin-bottom:12px;box-shadow:var(--shadow);
+  }
+  .feature.blue{border-left-color:var(--brand)}
+  .feature.gold{border-left-color:var(--accent)}
+  .feature .fv{
+    flex:0 0 60px;height:60px;border-radius:10px;display:flex;align-items:center;justify-content:center;
+    background:linear-gradient(135deg,#08243d,#0b4f8a);color:#ffd98a;font-family:var(--serif);
+    font-size:11px;text-align:center;line-height:1.15;padding:6px;font-weight:600;
+  }
+  .feature h4{margin:0 0 6px;font-size:15.8px;line-height:1.35}
+  .feature .meta{font-size:12.8px;color:var(--muted)}
+  .feature p{margin:7px 0 0;font-size:13.7px;color:var(--ink-soft)}
+
+  /* NEWS */
+  .news-list{border-left:2px solid var(--line);padding-left:0;margin:0;list-style:none}
+  .news-list li{position:relative;padding:10px 0 10px 22px;border-bottom:1px dashed var(--line)}
+  .news-list li:last-child{border-bottom:none}
+  .news-list li::before{
+    content:"";position:absolute;left:-6px;top:17px;width:9px;height:9px;border-radius:50%;
+    background:#fff;border:2.5px solid var(--brand-2);
+  }
+  .news-list li.hot::before{border-color:var(--hot);background:var(--hot)}
+  .news-date{display:inline-block;min-width:72px;font-size:12px;font-weight:700;color:var(--brand);letter-spacing:.4px}
+  .news-txt{font-size:14px}
+  .pill{
+    display:inline-block;font-size:10px;font-weight:700;letter-spacing:.4px;text-transform:uppercase;
+    padding:2px 7px;border-radius:12px;margin-left:6px;vertical-align:1px;
+  }
+  .pill-hot{background:#fdecea;color:var(--hot)}
+  .pill-new{background:#e7f4f7;color:#0a6f83}
+  .pill-gold{background:#fbf1dc;color:#8a6415}
+
+  /* PUBLICATIONS */
+  .filters{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:16px}
+  .filters button{
+    font:inherit;font-size:12.8px;font-weight:600;padding:6px 12px;border-radius:18px;cursor:pointer;
+    background:#fff;border:1px solid var(--line);color:var(--ink-soft);transition:.18s;
+  }
+  .filters button:hover{border-color:var(--brand)}
+  .filters button.on{background:var(--brand);color:#fff;border-color:var(--brand)}
+
+  ol.pubs{list-style:none;counter-reset:p;margin:0;padding:0}
+  ol.pubs li{
+    counter-increment:p;position:relative;padding:12px 12px 12px 42px;border-bottom:1px solid var(--line);
+    font-size:14.1px;transition:.15s;border-radius:8px;
+  }
+  ol.pubs li:hover{background:#fff;box-shadow:var(--shadow)}
+  ol.pubs li::before{
+    content:counter(p);position:absolute;left:10px;top:13px;width:22px;height:22px;border-radius:6px;
+    background:var(--bg-soft);border:1px solid var(--line);color:var(--muted);
+    font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center;
+  }
+  ol.pubs .me{font-weight:700;color:var(--ink)}
+  ol.pubs .ti{color:var(--ink)}
+  ol.pubs .ve{font-style:italic;color:var(--ink-soft)}
+  .jbadge{
+    display:inline-block;font-size:10px;font-weight:700;padding:2px 6px;border-radius:5px;margin-left:6px;
+    background:#eef4fa;color:var(--brand);letter-spacing:.2px;white-space:nowrap;
+  }
+  .jbadge.top{background:#fdecea;color:var(--hot)}
+  .jbadge.note{background:#fbf1dc;color:#8a6415}
+  .jbadge.rev{background:#eae7fb;color:#4c3fa8}
+
+  /* AWARDS TIMELINE */
+  .tl{position:relative;margin-left:6px;padding-left:24px;border-left:2px solid #e6d5ae}
+  .tl-year{
+    position:relative;font-family:var(--serif);font-size:18px;color:var(--brand);margin:18px 0 8px;font-weight:600;
+  }
+  .tl-year::before{
+    content:"";position:absolute;left:-32px;top:8px;width:12px;height:12px;border-radius:50%;
+    background:var(--accent);border:3px solid #fff;box-shadow:0 0 0 2px #e6d5ae;
+  }
+  .aw{
+    background:#fff;border:1px solid var(--line);border-radius:10px;padding:11px 14px;margin-bottom:8px;
+    display:flex;gap:12px;align-items:flex-start;box-shadow:0 2px 10px rgba(13,27,42,.05);
+  }
+  .aw .m{flex:0 0 300px;font-size:16px;line-height:1.2}
+  .aw .m img{width:270px;height:160px;object-fit:cover;border-radius:6px;max-width:none}
+  .aw .m.aw-icon{
+    flex:0 0 60px;height:60px;border-radius:10px;display:flex;align-items:center;justify-content:center;
+    background:#fbf1dc;color:var(--accent);font-size:28px;
+  }
+  .aw .m.aw-icon .fa{width:30px;height:30px}
+  .aw b{font-size:14.3px;display:block}
+  .aw span{font-size:13px;color:var(--ink-soft)}
+
+  /* SIMPLE LIST BLOCKS */
+  .bl{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:18px 18px;box-shadow:var(--shadow);margin-bottom:14px}
+  .bl h4{margin:0 0 9px;font-size:15.5px;color:var(--brand)}
+  .bl ul{margin:0;padding-left:18px;font-size:14px;color:var(--ink-soft)}
+  .bl ul li{margin:5px 0}
+  .bl table{width:100%;border-collapse:collapse;font-size:13.8px}
+  .bl td{padding:8px 6px;border-bottom:1px solid var(--line);vertical-align:top;color:var(--ink-soft)}
+  .bl td:first-child{color:var(--ink);font-weight:600;width:58%}
+  .bl td:last-child{text-align:right;white-space:nowrap;font-size:12.8px}
+  .money{color:#0a6f83;font-weight:700}
+
+  /* CONTACT */
+  .contact{
+    background:
+      radial-gradient(700px 320px at 12% -6%, rgba(168,214,209,.06), transparent 40%),
+      radial-gradient(600px 280px at 92% 18%, rgba(183,148,90,.06), transparent 52%),
+      linear-gradient(120deg,#111b24 0%,#1a2a35 35%,#2a3d4d 100%);
+    color:#fff;
+  }
+  .contact h2{color:#fff}
+  .contact .sec-kicker{color:var(--accent)}
+  .cgrid{display:grid;grid-template-columns:1.1fr .9fr;gap:22px;margin-top:8px}
+  .cbox{background:rgba(255,255,255,.04);border:1px solid rgba(183,148,90,.10);border-radius:var(--radius);padding:18px}
+  .cbox h4{margin:0 0 12px;font-size:16px;color:var(--accent)}
+  .cbox p,.cbox li{font-size:14px;color:rgba(255,255,255,.88)}
+  .cbox a{color:var(--accent)}
+  .cbox ul{padding-left:18px;margin:8px 0 0}
+  footer{background:#061726;color:#8fb2cd;font-size:12.5px;padding:18px 0;text-align:center}
+
+  /* RESPONSIVE */
+  @media(max-width:980px){
+    .grid-3{grid-template-columns:1fr 1fr}
+    .stats-grid{grid-template-columns:repeat(3,1fr)}
+    .stat:nth-child(3){border-right:none}
+    .cgrid{grid-template-columns:1fr}
+  }
+  @media(max-width:760px){
+    .layout{display:block}
+    .sidebar{display:none}
+    .mobilebar{
+      display:flex;align-items:center;gap:10px;position:sticky;top:0;z-index:50;
+      background:#08243d;color:#fff;padding:10px 16px;
+    }
+    .mobilebar img,.mobilebar .mb-fb{width:34px;height:34px;border-radius:50%;object-fit:cover;border:1px solid rgba(255,255,255,.5);
+      display:flex;align-items:center;justify-content:center;background:#0d8ba1;font-size:14px}
+    .mobilebar b{font-size:14px}
+    .mobilebar select{margin-left:auto;font:inherit;font-size:12.5px;padding:5px 8px;border-radius:8px;border:none}
+    .wrap{padding:0 18px}
+    .grid-3,.grid-2{grid-template-columns:1fr}
+    .stats-grid{grid-template-columns:repeat(2,1fr)}
+    .stat{border-right:none;border-bottom:1px solid rgba(255,255,255,.1)}
+    h1.hero-name{font-size:31px}
+    .feature{flex-direction:column}
+  }
+  </style>
+</head>
+<body>
+
+<!-- Inline SVG sprite (embedded to allow fragment use with file: URLs) -->
+<?xml version="1.0" encoding="utf-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none">
+  <symbol id="scholar" viewBox="0 0 24 24">
+    <path d="M12 2l8 4-8 4-8-4 8-4zm0 6.5L18.5 8 12 5.5 5.5 8 12 8.5zM6 10v2c0 3.3 3.1 6 6 6s6-2.7 6-6v-2"/>
+  </symbol>
+  <symbol id="orcid" viewBox="0 0 24 24">
+    <circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.6" fill="none"/>
+    <path d="M8 12h8" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" fill="none"/>
+  </symbol>
+  <symbol id="github" viewBox="0 0 24 24">
+    <path d="M12 .5a11.5 11.5 0 00-3.6 22.4c.6.1.8-.2.8-.6v-2.1c-3.3.7-4-1.6-4-1.6-.5-1.2-1.2-1.5-1.2-1.5-1-.7.1-.7.1-.7 1.1.1 1.7 1.2 1.7 1.2 1 .1 1.6-.8 1.9-1.3-.9-.1-1.8-.4-1.8-2 0-.4.1-.8.4-1.1-1.3-.2-2.6-.6-2.6-2.8 0-.6.2-1.1.6-1.6-.1-.2-.3-1.2.1-2.6 0 0 .5-.2 1.6.6a5.4 5.4 0 013-.9c1 0 2 .3 3 .9 1-0.8 1.6-0.6 1.6-0.6.4 1.4.2 2.4.1 2.6.4.5.6 1 .6 1.6 0 2.2-1.3 2.6-2.6 2.8.3.3.5.7.5 1.4v2.1c0 .4.2.7.8.6A11.5 11.5 0 0012 .5z"/>
+  </symbol>
+  <symbol id="linkedin" viewBox="0 0 24 24">
+    <rect x="2" y="3" width="20" height="18" rx="2" ry="2" fill="none" stroke="currentColor" stroke-width="1.2"/>
+    <path d="M7 10v7M7 7v.01M11 17v-4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
+    <rect x="11" y="7" width="6" height="10" rx="0.6" fill="none" stroke="currentColor" stroke-width="1.2"/>
+  </symbol>
+  <symbol id="envelope" viewBox="0 0 24 24">
+    <rect x="2" y="5" width="20" height="14" rx="2" ry="2" fill="none" stroke="currentColor" stroke-width="1.4"/>
+    <path d="M3 7l9 6 9-6" stroke="currentColor" stroke-width="1.4" fill="none" stroke-linecap="round"/>
+  </symbol>
+  <symbol id="phone" viewBox="0 0 24 24">
+    <path d="M6.6 10.2a15 15 0 006.5 6.5l1.6-1.6a1 1 0 011.1-.2c1.2.5 2.6.8 4 .8a1 1 0 011 1v2a1 1 0 01-1 1C10.5 20.8 3 13.3 3 4a1 1 0 011-1h2a1 1 0 011 1c0 1.4.3 2.8.8 4a1 1 0 01-.2 1.1L6.6 10.2z"/>
+  </symbol>
+  <symbol id="map-marker" viewBox="0 0 24 24">
+    <path d="M12 2C8 2 5 5.1 5 9.2c0 5.4 7 12.2 7 12.2s7-6.8 7-12.2C19 5.1 16 2 12 2z"/>
+    <circle cx="12" cy="9" r="2.2" fill="white"/>
+  </symbol>
+  <symbol id="file-pdf" viewBox="0 0 24 24">
+    <path d="M6 2h7l5 5v13a1 1 0 01-1 1H6a1 1 0 01-1-1V3a1 1 0 011-1z" stroke="currentColor" stroke-width="0.9" fill="none"/>
+    <text x="8" y="16" font-size="6" fill="currentColor" font-family="Arial,Helvetica,sans-serif">PDF</text>
+  </symbol>
+  <symbol id="camera" viewBox="0 0 24 24">
+    <rect x="3.5" y="6" width="17" height="12" rx="2" ry="2" stroke="currentColor" stroke-width="1.2" fill="none"/>
+    <circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="1.2" fill="none"/>
+    <rect x="7" y="4" width="3" height="2" rx="0.5" fill="currentColor"/>
+  </symbol>
+  <symbol id="cog" viewBox="0 0 24 24">
+    <path d="M12 15.5a3.5 3.5 0 100-7 3.5 3.5 0 000 7z" fill="none" stroke="currentColor" stroke-width="1.2"/>
+    <path d="M19.4 13.1l1.3-1.1-1.1-1.9-1.6.2a7.3 7.3 0 00-1.1-1.2l.4-1.6-2-1-1 1.2a7.1 7.1 0 00-1.7 0l-1-1.2-2 1 .4 1.6c-.4.4-.8.9-1.1 1.2l-1.6-.2-1.1 1.9 1.3 1.1c-.1.5-.1 1-.1 1.5s0 1 .1 1.5l-1.3 1.1 1.1 1.9 1.6-.2c.3.4.7.8 1.1 1.2l-.4 1.6 2 1 1-1.2c.5.1 1 .1 1.7 0l1 1.2 2-1-.4-1.6c.4-.4.8-.9 1.1-1.2l1.6.2 1.1-1.9-1.3-1.1c.1-.5.1-1 .1-1.5s0-1-.1-1.5z" fill="none" stroke="currentColor" stroke-width="0.9"/>
+  </symbol>
+  <symbol id="star" viewBox="0 0 24 24">
+    <path d="M12 2l2.6 6.8L22 10l-5 3.8L18.2 22 12 18.6 5.8 22 7 13.8 2 10l7.4-1.2z"/>
+  </symbol>
+  <symbol id="trophy" viewBox="0 0 24 24">
+    <path d="M7 4V3h10v1a5 5 0 01-10 0z"/>
+    <path d="M6 7h12v3a5 5 0 01-5 5h-2a5 5 0 01-5-5V7z" fill="none" stroke="currentColor" stroke-width="1.1"/>
+    <path d="M10 19v2h4v-2" stroke="currentColor" stroke-width="1.1" fill="none"/>
+  </symbol>
+  <symbol id="download" viewBox="0 0 24 24">
+    <path d="M12 3v11" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+    <path d="M7 11l5 5 5-5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M5 20h14" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+  </symbol>
+  <symbol id="external-link" viewBox="0 0 24 24">
+    <path d="M14 3h7v7" stroke="currentColor" stroke-width="1.4" fill="none"/>
+    <path d="M10 14L21 3" stroke="currentColor" stroke-width="1.4" fill="none"/>
+    <path d="M21 21H3V3" stroke="currentColor" stroke-width="1.2" fill="none"/>
+  </symbol>
+  <symbol id="flask" viewBox="0 0 24 24">
+    <path d="M9 3h6v3" stroke="currentColor" stroke-width="1.2" fill="none"/>
+    <path d="M8 6h8l2 8a6 6 0 11-12 0z" stroke="currentColor" stroke-width="1.2" fill="none"/>
+  </symbol>
+</svg>
+
+<!-- ======================= MOBILE BAR ======================= -->
+<div class="mobilebar">
+  <div class="mb-fb">YZ</div>
+  <b>Prof. Yanmin Zhu · HKU</b>
+  <select onchange="if(this.value)location.hash=this.value">
+    <option value="">Menu ▾</option>
+    <option value="#about">About</option>
+    <option value="#highlights">Highlights</option>
+    <option value="#news">News</option>
+    <option value="#research">Research</option>
+    <option value="#pubs">Publications</option>
+    <option value="#patents">Patents</option>
+    <option value="#awards">Awards</option>
+    <option value="#funding">Funding</option>
+    <option value="#service">Service</option>
+    <option value="#teaching">Teaching</option>
+    <option value="#contact">Contact</option>
+  </select>
+</div>
+
+<div class="layout">
+
+  <!-- ======================= SIDEBAR ======================= -->
+  <aside class="sidebar">
+    <div class="avatar-wrap">
+      <img class="avatar" src="profile.jpg" alt="Prof. Yanmin Zhu" onerror="this.outerHTML='<div class=&quot;avatar-fallback&quot;>YZ</div>'">
+      <div class="side-name">Yanmin&nbsp;Zhu, Ph.D.</div>
+    </div>
+
+    <div class="side-role">
+      <b>Presidential Research Assistant Professor</b><br>
+      Dept. of Electrical &amp; Computer Engineering<br>
+      School of Biomedical Engineering<br>
+      The University of Hong Kong<br><br>
+      <b>Adjunct Professor</b><br>
+      Dept. of Computer Science,<br>UMass Boston<br><br>
+      <b>Co-founder &amp; CTO</b><br>
+      SpectroGen.AI · Holosense Technology
+    </div>
+
+    <nav class="side-nav" id="nav">
+      <a href="#about">About</a>
+      <a href="#highlights">Research Highlights</a>
+      <a href="#news">News &amp; Media</a>
+      <a href="#research">Research Directions</a>
+      <a href="#pubs">Publications</a>
+      <a href="#patents">Patents</a>
+      <a href="#awards">Awards &amp; Honors</a>
+      <a href="#funding">Grants &amp; Projects</a>
+      <a href="#service">Professional Service</a>
+      <a href="#teaching">Teaching &amp; Mentorship</a>
+      <a href="#contact">Contact &amp; Join Us</a>
+    </nav>
+
+    <div class="side-links">
+      <a href="https://scholar.google.com/citations?user=cy7Z7CYAAAAJ&hl=zh-TW" target="_blank" rel="noopener"><svg class="fa"><use href="#scholar"></use></svg>Google&nbsp;Scholar</a>
+      <a href="https://orcid.org/my-orcid?orcid=0000-0002-3968-5372" target="_blank" rel="noopener"><svg class="fa"><use href="#orcid"></use></svg>ORCID</a>
+      <a href="https://github.com/ymzhu19eee" target="_blank" rel="noopener"><svg class="fa"><use href="#github"></use></svg>GitHub</a>
+      <a href="https://www.linkedin.com/in/yanmin-zhu-4a2328110/?locale=en" target="_blank" rel="noopener"><svg class="fa"><use href="#linkedin"></use></svg>LinkedIn</a>
+      <a href="mailto:ymzhu@hku.hk"><svg class="fa"><use href="#envelope"></use></svg>Email</a>
+      <!--<a href="CV_Yanmin_Zhu.pdf" target="_blank"><svg class="fa"><use href="#file-pdf"></use></svg>CV&nbsp;(PDF)</a> -->
+    </div>
+
+    <div class="side-foot">
+      R512, Chow Yei Ching Building<br>
+      Pokfulam, Hong Kong SAR<br>
+      ymzhu@hku.hk <br><br>
+      SPIE Member · Optica Member · HKIS Member
+    </div>
+  </aside>
+
+  <!-- ======================= CONTENT ======================= -->
+  <main class="content">
+
+    <!-- ---------- HERO ---------- -->
+    <header class="hero" id="top">
+      <div class="hero-inner wrap">
+        <span class="eyebrow">Computational Imaging · Intelligent Photonics · Optical Computing · Physics-informed AI · AI for Science</span>
+        <h1 class="hero-name">Prof. Yanmin Zhu</h1>
+        <div class="hero-cn">Ph.D., The University of Hong Kong</div>
+        <div class="hero-titles">
+          <div><span class="b">Presidential Research Assistant Professor</span> — Dept. of Electrical &amp; Computer Engineering &amp; School of Biomedical Engineering, The University of Hong Kong</div>
+          <div><span class="b">Adjunct Professor</span> — Dept. of Computer Science, University of Massachusetts Boston</div>
+          <div><span class="b">Former Postdoctoral Associate</span> — Dept. of Mechanical Engineering, Massachusetts Institute of Technology (MIT)</div>
+          <div><span class="b">Co-founder &amp; Leader </span> — SpectroGen.AI (USA) &nbsp;·&nbsp; Director &amp; CTO — Holosense Technology Co. Ltd (HK)</div>
+        </div>
+        <div class="hero-tags">
+          <span class="tag">Physics-Informed Generative AI</span>
+          <span class="tag">Digital &amp; Polarization Holography</span>
+          <span class="tag">Computational Spectroscopy</span>
+          <span class="tag">Speckle &amp; Coherent Imaging</span>
+          <span class="tag">Optical Neural Networks</span>
+          <span class="tag">Label-free Phenotyping</span>
+          <span class="tag">Wearable / Edge AI Devices</span>
+          <span class="tag">Nano-/Micro-plastics Sensing</span>
+        </div>
+        <div class="hero-cta">
+          <a class="btn btn-solid" href="#highlights">Research Highlights →</a>
+          <a class="btn btn-ghost" href="#pubs">Publications</a>
+          <a class="btn btn-ghost" href="#contact">Openings: PhD / RA / Postdoc</a>
+        </div>
+      </div>
+    </header>
+
+    <!-- ---------- STATS ---------- -->
+    <div class="stats">
+      <div class="stats-grid">
+        <div class="stat"><span class="n" data-to="20">20</span><span class="l">Journal Papers</span></div>
+        <div class="stat"><span class="n" data-to="30">30</span><span class="l">Conf. Papers &amp; Talks</span></div>
+        <div class="stat"><span class="n" data-to="7">7</span><span class="l">Patents Filed</span></div>
+        <div class="stat"><span class="n" data-to="18">18</span><span class="l">Awards &amp; Honors</span></div>
+        <div class="stat"><span class="n" data-to="6">6</span><span class="l">Nature-family Under Review</span></div>
+        <div class="stat"><span class="n" data-to="2">2</span><span class="l">Deep-Tech Startups</span></div>
+      </div>
+    </div>
+
+    <!-- ---------- ABOUT ---------- -->
+    <section id="about">
+      <div class="wrap">
+        <div class="sec-head">
+          <div class="sec-kicker">About</div>
+          <h2>Seeing the invisible — with physics and AI<span class="rule"></span></h2>
+        </div>
+        <div class="grid-2">
+          <div>
+            <p>I am a <b>Presidential Research Assistant Professor</b> at <b>The University of Hong Kong</b>, jointly appointed in the <b>Department of Electrical and Computer Engineering</b> and the <b>School of Biomedical Engineering</b>, and an <b>Adjunct Professor</b> in Computer Science at the <b>University of Massachusetts Boston</b>. Prior to that, I was a <b>Postdoctoral Associate at MIT</b> (Department of Mechanical Engineering), working with  <a class="mentor-link" href="https://tadesselab.mit.edu/team/" target="_blank" rel="noopener">Prof. Loza F. Tadesse (Forbes 30 under 30)</a> and <a class="mentor-link" href="https://meche.mit.edu/people/faculty/gbarb@mit.edu" target="_blank" rel="noopener">Prof. George Barbastathis</a>.</p>
+           
+            <p>My group works at the intersection of <b>physical optics and artificial intelligence</b>: we jointly design optical hardware, physics-informed algorithms, and edge computing systems to build imaging and sensing instruments that are <b>label-free, real-time, high-throughput, and deployable in the field</b>. Our systems have been applied to <b>disease early warning, wearable body-fluid diagnostics, nanoplastic pollution monitoring, and cross-modality materials characterization</b>.</p>
+            <p>I received my <b>Ph.D.</b> from The University of Hong Kong (computational imaging) under the supervision of <a class="mentor-link" href="https://web.ece.hku.hk/~elam/index.html" target="_blank" rel="noopener">Prof. Edmund Y. Lam</a> and <a class="mentor-link" href="https://i-school.hku.hk/people/hso/" target="_blank" rel="noopener">Prof. Hayden K.H., So</a>, <b>MSc in Optics and Photonics</b> from <b>Imperial College London</b> (<i>awarded with Merit</i>) under the supervision of <a class="mentor-link" href="https://profiles.imperial.ac.uk/mark.neil" target="_blank" rel="noopener">Prof. Mark Neil</a> and <a class="mentor-link" href="https://profiles.imperial.ac.uk/christopher.dunsby" target="_blank" rel="noopener">Prof. Christopher Dunsby</a>, and <b>BSc in Electronic Engineering</b> from <b>KU Leuven</b> (<i>Cum Laude</i>) under the supervision of <a class="mentor-link" href="https://iiw.kuleuven.be/onderzoek/emedia/people/geurtslucca" target="_blank" rel="noopener">Prof. Lucca Geurts</a>.</p>
+            <p>I am also a <b>technology translator</b>: co-founder and technical leader of <b>SpectroGen.AI</b> (USA) and Director/CTO of <b>Holosense Technology Co. Ltd</b> (Hong Kong), turning laboratory breakthroughs into instruments and software products.</p>
+          </div>
+          <div>
+            <div class="bl">
+              <h4>Education</h4>
+              <ul>
+                <li><b>Ph.D.</b>, Electrical &amp; Computer Engineering — <b>The University of Hong Kong</b><br><span style="color:var(--muted)">Computational imaging</span></li>
+                <li><b>MSc</b>, Optics and Photonics — <b>Imperial College London</b><br><span style="color:var(--muted)">Awarded Merit Honour Degree</span></li>
+                <li><b>BSc</b>, Electronic Engineering — <b>KU Leuven</b>, Belgium<br><span style="color:var(--muted)">Awarded Cum Laude Honour Degree</span></li>
+              </ul>
+            </div>
+            <div class="bl">
+              <h4>Appointments</h4>
+              <ul>
+                <li>Presidential Research Assistant Professor — <b>HKU</b> (ECE &amp; School of Biomedical Engineering)</li>
+                <li>Adjunct Professor — <b>UMass Boston</b>, Computer Science</li>
+                <li>Postdoctoral Associate — <b>MIT</b>, Mechanical Engineering</li>
+                <li>Co-founder &amp; Leader — <b>SpectroGen.AI</b>, USA</li>
+                <li>Director &amp; CTO — <b>Holosense Technology Co. Ltd</b>, HK</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ---------- HIGHLIGHTS ---------- -->
+    <section class="alt" id="highlights">
+      <div class="wrap">
+        <div class="sec-head">
+          <div class="sec-kicker">Research Highlights</div>
+          <h2>Selected breakthroughs<span class="rule"></span></h2>
+          <p class="sec-sub">From a generative "virtual spectrometer" featured in <i>Matter</i> (Cell Press) to single-nanoparticle speckle holography, our work has been recognised by international invention exhibitions, media coverage, and industry adoption.</p>
+        </div>
+
+        <div class="feature">
+          <div class="fv">Matter<br>2026</div>
+          <div>
+            <h4>SpectroGen — a physics-informed generative AI that acts as a “virtual spectrometer”</h4>
+            <div class="meta">Y. Zhu &amp; L. F. Tadesse, <i>Matter</i> (Cell Press), vol. 9(1), 102434, 2026 &nbsp;<span class="pill pill-hot">Featured in media</span></div>
+            <p>Generates and translates spectra <b>across modalities</b> (e.g., Raman ↔ XRD ↔ IR) from physical priors instead of paired data, dramatically accelerating materials characterization and discovery. Covered by international science media as <i>“The Virtual Spectrometer”</i> and commercialised through <b>SpectroGen.AI</b>; protected by US provisional patent.</p>
+          </div>
+        </div>
+
+        <div class="feature">
+          <div class="fv">Nature<br>Photon.<br>(rev.)</div>
+          <div>
+            <h4>Label-free single-nanoparticle deep speckle holography</h4>
+            <div class="meta">Y. Zhu <i>et al.</i>, under review at <i>Nature Photonics</i> &nbsp;<span class="pill pill-new">Under review</span></div>
+            <p>Turns coherent speckle, usually treated as noise, into an information channel enabling <b>single-nanoparticle detection without labels</b>, with a companion physics-informed framework for label-free <b>spatial phenotyping</b>.</p>
+          </div>
+        </div>
+
+        <div class="feature blue">
+          <div class="fv">Comm.<br>Eng.<br>2024</div>
+          <div>
+            <h4>SPLASH: smart polarization &amp; spectroscopic holography for real-time microplastics identification</h4>
+            <div class="meta">Y. Zhu, Y. Li, J. Huang, E. Y. Lam, <i>Communications Engineering</i> (Springer Nature), 3:32, 2024</div>
+            <p>A field-deployable instrument that identifies plastic types <b>in real time and label-free</b>, even in turbid water. Recognised with a <b>Silver Medal at the 49<sup>th</sup> International Exhibition of Inventions of Geneva (2024)</b> and reported by HKU as a novel imaging technology for accurate microplastic detection; now commercialised via <b>Holosense Technology</b>.</p>
+          </div>
+        </div>
+
+        <div class="feature gold">
+          <div class="fv">Top<br>Cited</div>
+          <div>
+            <h4>Setting the agenda for deep learning in holography</h4>
+            <div class="meta"><i>Optics Express</i> (2021, top-downloaded) · <i>Progress in Quantum Electronics</i> (2026) · <i>Advanced Photonics Research</i> (2024) · <i>Applied Optics</i> (among 15 most-cited articles 2020–2022)</div>
+            <p>Our review series has become <b>reference reading</b> for the deep-learning-for-holography community, complemented by invited papers in <i>Journal of Physics: Photonics</i> and repeated invitations to speak at <b>SPIE Photonics West</b> and <b>Optica Digital Holography</b> meetings.</p>
+          </div>
+        </div>
+
+        <div class="feature blue">
+          <div class="fv">MIT ×<br>Google</div>
+          <div>
+            <h4>AI for pandemic prevention — US$500,000 MIT–Google research programme</h4>
+            <div class="meta">Principal contributor, MIT–Google Research Fund, 2023–2025</div>
+            <p>Energy- and data-efficient machine learning for <b>rapid point-of-need diagnostics</b> addressing climate-change-induced global health threats — bridging optical hardware, edge computing, and generative AI.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ---------- NEWS ---------- -->
+    <section class="alt" id="news">
+      <div class="wrap">
+        <div class="sec-head">
+          <div class="sec-kicker">News &amp; Media</div>
+          <h2>Recent news<span class="rule"></span></h2>
+        </div>
+        <ul class="news-list">
+          <li class="hot"><span class="news-date">2026</span><span class="news-txt">Invited to attend the <b>“Beijing Visit for Hong Kong Talents”</b> exchange session at the <b>Beijing Academy of Social Sciences</b>, engaging with fellow Hong Kong scholars on regional development, cultural innovation, healthcare and frontier technology. <a class="mentor-link" href="https://share.rmzxw.net.cn/article/4415394/1.html?t=1786546030&amp;sign=e10318da5a8d6adc9d2c8092fe5b43e2" target="_blank" rel="noopener">Read the report</a> <span class="pill pill-hot">Invited</span></span></li>
+          <li><span class="news-date">2026</span><span class="news-txt">Joined the <b>“Beijing Visit for Hong Kong Talents”</b> innovation exchange in <b>Zhongguancun</b>, exploring opportunities for deeper collaboration between Hong Kong research teams, Beijing enterprises and technology platforms. <a class="mentor-link" href="https://share.rmzxw.net.cn/article/4415386/1.html?t=1786522815&amp;sign=f34f8f3f89e62d40170e2cdd84e7f86c" target="_blank" rel="noopener">Read the report</a> <span class="pill pill-new">Science &amp; Innovation</span></span></li>
+          <li><span class="news-date">2026</span><span class="news-txt">Visited <b>Zhongguancun Life Science Park</b> as part of the <b>“Beijing Visit for Hong Kong Talents”</b> programme, learning about Beijing’s life-science and AI-enabled biomedical innovation ecosystem and its potential for cross-border research translation. <a class="mentor-link" href="https://share.rmzxw.net.cn/article/4415468/1.html?t=1786598001&amp;sign=5d4d193154bd63d06ec16176d5c9b331" target="_blank" rel="noopener">Read the report</a> <span class="pill pill-gold">AI for Health</span></span></li>
+          <li><span class="news-date">2026</span><span class="news-txt"><b>PINSA</b>, a physics-informed neural spectral imaging method for plastisphere differentiation, has been published in <b>ACS Photonics</b>. <span class="pill pill-new">Journal Publication</span></span></li>
+          <li><span class="news-date">2026</span><span class="news-txt"><b>Stokes-consistent computational polarimetric reconstruction</b> for label-free imaging of nanoplastic-induced perturbations has been published in <b>Optics Express</b>. <span class="pill pill-new">Journal Publication</span></span></li>
+          <li><span class="news-date">2025</span><span class="news-txt"><b>MESH</b>, a metasurface-encoded single-pixel hyperspectral imaging approach, has been published in <b>Advanced Photonics Research</b>. <span class="pill pill-gold">Optics &amp; Photonics</span></span></li>
+          <li><span class="news-date">2026</span><span class="news-txt"><b>SpectroGen</b> published in <i>Matter</i> (Cell Press) and covered by international media: <i><a class="mentor-link" href="https://news.mit.edu/2025/checking-quality-materials-just-got-easier-new-ai-tool-1014" target="_blank" rel="noopener">“Checking the quality of materials just got easier with a new AI tool”</a></i>, <i><a class="mentor-link" href="https://news.mit.edu/2025/checking-quality-materials-just-got-easier-new-ai-tool-1014" target="_blank" rel="noopener">“SpectroGen: The Virtual Spectrometer”</i></a>, <i><a class="mentor-link" href="https://www.linkedin.com/posts/aihealthmit_aiforgood-aiforhealth-healthcareinnovation-activity-7404201259185958912-6NM-/" target="_blank" rel="noopener">“AI accelerates materials discovery”</a></i>. <span class="pill pill-hot">Media</span></span></li>
+          <li><span class="news-date">2026</span><span class="news-txt">Invited review <a class="mentor-link" href="https://www.sciencedirect.com/science/article/pii/S0079672726000261" target="_blank" rel="noopener">“Advanced Deep Learning for Digital Holography: A Review”</a> has been published in <b>Progress in Quantum Electronics</b>.</span></li>
+          <li><span class="news-date">2026</span><span class="news-txt">Our latest work <b>HoloSpec</b>: <a class="mentor-link" href="https://www.sciencedirect.com/science/article/pii/S0079672726000261" target="_blank" rel="noopener">Dispersion-Based 4D Computational Holographic Hyperspectral Imaging</a> has been published in <b>Laser &amp; Photonics Reviews</b>. <span class="pill pill-gold">IF &gt; 9</span></span></li>
+          <li><span class="news-date">2026</span><span class="news-txt">Two contactless cardiovascular sensing papers published on <b>npj Digital Medicine</b> and <b>npj Cardiovascular Health</b>.<span class="pill pill-gold">Nature Portfolio</span></span></li>
+          <li><span class="news-date">2026</span><span class="news-txt">Co-founded <b>SpectroGen.AI</b> (USA) as <b>Co-founder</b>.</span></li>
+          <li><span class="news-date">2026</span><span class="news-txt">Appointed <b>Editor, <a class="mentor-link" href="https://www.frontiersin.org/journals/lab-on-a-chip-technologies" target="_blank" rel="noopener">Frontiers in Lab on a Chip Technologies</a></b>.</span></li>
+           <li><span class="news-date">2026</span><span class="news-txt">Serving on the Program Committee of <b><a class="mentor-link" href="https://www.sciencedirect.com/science/article/pii/S0079672726000261" target="_blank" rel="noopener">IEEE/ACM CCGrid 2026</a></b>.</span></li>
+          <li class="hot"><span class="news-date">2025</span><span class="news-txt">Winner of the <b><a class="mentor-link" href="https://y-lot.org/hkspa-2023-24-prof-yanmin-zhu-phd/" target="_blank" rel="noopener">3<sup>rd</sup> Hong Kong SciTech Young Pioneer Award — Future Innovation Scientist</a></b>. <span class="pill pill-gold">Award</span></span></li>
+          <li><span class="news-date">2025</span><span class="news-txt">Shortlisted for the <b><a class="mentor-link" href="https://ece.hku.hk/20260119-2/" target="_blank" rel="noopener">3<sup>rd</sup>HKIS Young Scientist Award 2025</a></b>.<span class="pill pill-gold">Award</span></span></li>
+          <li><span class="news-date">2025</span><span class="news-txt">Invited speaker at <b>SPIE Photonics West — AI and Optical Data Sciences VI</b> and the <b>HKU–KAUST Joint Workshop on Computational Imaging</b>.</span></li>
+          <li><span class="news-date">2025</span><span class="news-txt">Attended the <b>“Women Power United: Connecting Wuxi with the Greater Bay Area”</b> women’s science and innovation exchange and promotion event in Shenzhen, representing <b>The University of Hong Kong</b> and sharing work at the intersection of AI, advanced optics and intelligent diagnosis. <a class="mentor-link" href="https://mp.weixin.qq.com/s/6pMDpwhSBPZpDPMeEAwS8Q" target="_blank" rel="noopener">Read the report</a> <span class="pill pill-new">Science &amp; Innovation</span></span></li>
+          <li><span class="news-date">2025</span><span class="news-txt">Attended the <b>Wuxi–Hong Kong Science and Innovation Exchange and Cooperation Forum</b> in Xishan, Wuxi, representing <b>The University of Hong Kong</b> in the Hong Kong innovation project showcase and sharing research spanning AI and advanced technology. <a class="mentor-link" href="https://mp.weixin.qq.com/s/55d-kP_QgqjlNcWbQ8peYA" target="_blank" rel="noopener">Read the report</a> <span class="pill pill-new">Science &amp; Innovation</span></span></li>
+          <li class="hot"><span class="news-date">2024</span><span class="news-txt">Awarded the <b>Shanghai Baiyulan Talent Award</b>. <span class="pill pill-gold">Award</span></span></li>
+          <li><span class="news-date">2024</span><span class="news-txt">Awarded the <b>Silver Medal at the 49<sup>th</sup> International Exhibition of Inventions of Geneva</b>. <span class="pill pill-gold">Award</span></span></li>
+          <li><span class="news-date">2024</span><span class="news-txt"><b>SPLASH</b> published in <i>Communications Engineering</i> (Springer Nature); <b>Holosense Technology Co. Ltd</b> founded in Hong Kong (Director &amp; CTO).</span></li>
+          
+        </ul>
+      </div>
+    </section>
+
+    <!-- ---------- RESEARCH ---------- -->
+    <section id="research">
+      <div class="wrap">
+        <div class="sec-head">
+          <div class="sec-kicker">Research Directions</div>
+          <h2>Three pillars, one philosophy: co-design optics + AI<span class="rule"></span></h2>
+        </div>
+        <div class="grid-3">
+          <div class="card">
+            <img class="research-card-image imaging" src="research-imaging.png" alt="Computational imaging and intelligent photonics">
+            <h4>Computational Imaging &amp; Intelligent Photonics</h4>
+            <p>Instruments that reveal what conventional microscopes cannot.</p>
+            <ul>
+              <li>Digital &amp; polarization holography</li>
+              <li>Speckle and coherent imaging</li>
+              <li>Image-based phenotyping</li>
+              <li>Spectroscopic modality deconvolution &amp; transfer</li>
+              <li>Healthcare diagnosis &amp; disease early warning</li>
+            </ul>
+          </div>
+          <div class="card">
+            <img class="research-card-image optical-computing" src="research-optical-computing.png" alt="Optical computing and wearable edge AI">
+            <h4>Optical Computing &amp; Wearable / Edge AI</h4>
+            <p>Moving intelligence into the optics and to the point of need.</p>
+            <ul>
+              <li>Diffractive optical neural networks</li>
+              <li>Wearable body-fluid (sweat) diagnostics</li>
+              <li>Portable nanoplastics pollution monitors</li>
+              <li>Edge-GPU, real-time high-throughput pipelines</li>
+            </ul>
+          </div>
+          <div class="card">
+            <img class="research-card-image generative-ai" src="research-generative-ai.png" alt="Physics-informed and generative AI">
+            <h4>Physics-Informed &amp; Generative AI</h4>
+            <p>Models that obey physics — and therefore generalise.</p>
+            <ul>
+              <li>Generative AI for spectra &amp; images</li>
+              <li>Physics-informed neural networks</li>
+              <li>Transfer / zero-shot / untrained learning</li>
+              <li>Descattering, low-light &amp; lensless imaging</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="grid-3" style="margin-top:18px">
+          <div class="card">
+            <img class="research-card-image healthcare" src="research-healthcare.png" alt="AI for healthcare">
+            <h4>AI for Healthcare</h4>
+            <p>Contactless physiological monitoring (<i>npj Digital Medicine</i>, <i>npj Cardiovascular Health</i>), ophthalmic screening devices, wearable sweat analytics for early health surveillance.</p>
+          </div>
+          <div class="card">
+            <img class="research-card-image environment" src="research-environment.png" alt="AI for environment">
+            <h4>AI for Environment</h4>
+            <p>End-to-end optical + AI platforms for micro-/nano-plastic detection, plastisphere differentiation, and 4D phenotyping of nanoplastic impacts on aquatic organisms.</p>
+          </div>
+          <div class="card">
+            <img class="research-card-image materials" src="research-materials.png" alt="AI for materials and science">
+            <h4>AI for Materials &amp; Science</h4>
+            <p>Cross-modality spectral prediction and interpretation (SpectroGen), SERS mechanism studies, metasurface-encoded hyperspectral imaging, all-optical classification networks.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ---------- PUBLICATIONS ---------- -->
+    <section id="pubs">
+      <div class="wrap">
+        <div class="sec-head">
+          <div class="sec-kicker">Publications</div>
+          <h2>Journal articles, manuscripts under review &amp; conference papers<span class="rule"></span></h2>
+          <p class="sec-sub">Underlined names indicate my authorship. <b>*</b> equal contribution. Use the filters to browse by category.</p>
+        </div>
+
+        <div class="filters">
+          <button class="on" data-f="all">All</button>
+          <button data-f="journal">Journal Articles (20)</button>
+          <button data-f="review">Under Review (6)</button>
+          <button data-f="conf">Conference &amp; Invited (28)</button>
+        </div>
+
+        <!-- ===== JOURNAL ===== -->
+        <div class="pgroup" data-g="journal">
+          <h3>Peer-reviewed journal articles <span class="badge-year">2020 – 2026</span></h3>
+          <ol class="pubs">
+            <li><span class="me">Yanmin Zhu</span>, L. F. Tadesse, “SpectroGen: A physically informed generative artificial intelligence for accelerated cross-modality spectroscopic materials characterization,” <span class="ve">Matter</span>, 9(1), 102434, 2026, Cell Press. <span class="jbadge top">Cell Press</span><span class="jbadge note">Media covered</span></li>
+            <li>Y. Zhang, N. Chen, <span class="me">Yanmin Zhu</span>, J. Chen, C. Wang, T. Zeng, E. Y. Lam, “Advanced deep learning for digital holography: A review,” <span class="ve">Progress in Quantum Electronics</span>, 109, 100638, 2026. <span class="jbadge">Invited review</span></li>
+            <li>J. Chen, Y. Li, <span class="me">Yanmin Zhu</span>, E. Y. Lam, “HoloSpec: Dispersion-based 4D computational holographic hyperspectral imaging,” <span class="ve">Laser &amp; Photonics Reviews</span>, e71516, 2026. <span class="jbadge top">IF &gt; 9</span></li>
+            <li>S. Li, Y. Tian, <span class="me">Yanmin Zhu</span>, E. Y. Lam, M. Elgendi, “Adaptive physiologically constrained signal correction improves contactless heart rate monitoring,” <span class="ve">npj Digital Medicine</span>, 9, 233, 2026. <span class="jbadge top">Nature Portfolio</span></li>
+            <li>S. Li, M. Elgendi, <span class="me">Yanmin Zhu</span>, E. Y. Lam, C. Menon, “Lighting effects on optimal facial regions for remote heart rate measurement,” <span class="ve">npj Cardiovascular Health</span>, 3(40), 2026. <span class="jbadge top">Nature Portfolio</span></li>
+            <li>J. Chen, <span class="me">Yanmin Zhu</span>, Y. Li, Y. Cao, E. Y. Lam, “PINSA: Physics-informed neural spectral imaging for plastisphere differentiation,” <span class="ve">ACS Photonics</span>, 2026.</li>
+            <li>Y. Li, <span class="me">Yanmin Zhu</span>, J. Chen, E. Y. Lam, “Stokes-consistent computational polarimetric reconstruction for label-free imaging of nanoplastic-induced perturbations,” <span class="ve">Optics Express</span>, 34(16), 29280–29297, 2026.</li>
+            <li>H. Wang, <span class="me">Yanmin Zhu</span>, X. Lin, Y. Li, G. Luo, J. Li, H. Zheng, Z. Ji, D. Wang, Y. Geng, T. Fu, “All-optical classification using a single-layer dual-wavelength differential diffractive network surpassing multi-layer cascaded architectures,” <span class="ve">Optics Express</span>, 34, 11123–11138, 2026.</li>
+            <li>H. Nie, Y. Zhang, Y. Zhang, <span class="me">Yanmin Zhu</span>, J. Chen, Y. Tian, E. Y. Lam, “MESH: Metasurface-encoded single-pixel hyperspectral imaging,” <span class="ve">Advanced Photonics Research</span>, 7, e202500181, 2025.</li>
+            <li><span class="me">Yanmin Zhu</span>, Y. Li, J. Huang, E. Y. Lam, “Smart polarization and spectroscopic holography for real-time microplastics identification,” <span class="ve">Communications Engineering</span>, 3, 32(1–8), 2024, Springer Nature. <span class="jbadge top">Springer Nature</span><span class="jbadge note">Geneva Silver Medal</span></li>
+            <li><span class="me">Yanmin Zhu</span>, Y. Li, J. Huang, Y. Zhang, Y.-W. Ho, J. K.-H. Fang, E. Y. Lam, “Advanced optical imaging technologies for microplastics identification: Progress and challenges,” <span class="ve">Advanced Photonics Research</span>, 5, 2400038(1–22), 2024. <span class="jbadge">Review</span></li>
+            <li>Y. Li, <span class="me">Yanmin Zhu</span>, J. Huang, Y.-W. Ho, J. K.-H. Fang, E. Y. Lam, “High-throughput microplastic assessment using polarization holographic imaging,” <span class="ve">Scientific Reports</span>, 14, 2355(1–11), 2024.</li>
+            <li>J. Huang, <span class="me">Yanmin Zhu</span>, Y. Li, E. Y. Lam, “Snapshot polarization-sensitive holography for identifying microplastic in turbid water,” <span class="ve">ACS Photonics</span>, 10(12), 4483–4493, 2023.</li>
+            <li>H. H. S. Lam, <span class="me">Yanmin Zhu</span>, P. Buranasiri, “Off-axis holographic interferometer with ensemble deep learning for biological tissues identification,” <span class="ve">Applied Sciences</span>, 12(24), 12674, 2022.</li>
+            <li><span class="me">Yanmin Zhu</span>, H. K. A. Lo, C. H. Yeung, E. Y. Lam, “Microplastic pollution assessment with digital holography and zero-shot learning,” <span class="ve">APL Photonics</span>, 7(7), 2022.</li>
+            <li>Y. Zhang, <span class="me">Yanmin Zhu</span>, E. Y. Lam, “Holographic 3D particle reconstruction using a one-stage network,” <span class="ve">Applied Optics</span>, 61(5), B111–B120, 2022.</li>
+            <li><span class="me">Yanmin Zhu</span>, T. Zeng, K. Liu, Z. Ren, E. Y. Lam, “Full scene underwater imaging with polarization and untrained network,” <span class="ve">Optics Express</span>, 29(25), 41865–41881, 2021. <span class="jbadge note">Top-downloaded</span></li>
+            <li>T. Zeng*, <span class="me">Yanmin Zhu*</span>, E. Y. Lam, “Deep learning for digital holography: A review,” <span class="ve">Optics Express</span>, 29(24), 40572–40593, 2021. <span class="jbadge note">Top-downloaded · highly cited</span></li>
+            <li><span class="me">Yanmin Zhu</span>, C. H. Yeung, E. Y. Lam, “Microplastic pollution monitoring with holographic classification and deep learning,” <span class="ve">Journal of Physics: Photonics</span>, 3(2), 024013(1–12), 2021. <span class="jbadge">Invited paper</span></li>
+            <li><span class="me">Yanmin Zhu</span>, C. H. Yeung, E. Y. Lam, “Digital holographic imaging and classification of microplastics using deep transfer learning,” <span class="ve">Applied Optics</span>, 60(4), A38–A47, 2021. <span class="jbadge note">Among 15 most-cited articles, 2020–2022</span></li>
+          </ol>
+        </div>
+
+        <!-- ===== UNDER REVIEW ===== -->
+        <div class="pgroup" data-g="review">
+          <h3>Manuscripts under review <span class="badge-year"></span></h3>
+          <ol class="pubs">
+            <li><span class="me">Yanmin Zhu</span>, Y. Li, J. Chen, D. Y.-W. Ho, B. Lu, X.-Q. Wang, J. K.-H. Fang, F. C. C. Ling, L. F. Tadesse, E. Y. Lam, “Label-free single-nanoparticle deep speckle holography,”.
+            <li><span class="me">Yanmin Zhu</span>, Y. Li, J. Chen, D. Y.-W. Ho, B. Lu, J. K.-H. Fang, E. Y. Lam, “Scattering coherence polarization (SCoP) imaging: a physics-informed multidimensional platform for label-free spatial phenotyping,”.
+            <li>Y. Li, <span class="me">Yanmin Zhu</span>, J. Chen, R. Chen, Y.-W. Ho, C. Wang, J. K.-H. Fang, K. K. Tsia, E. Y. Lam, “Polarization holographic 4D phenotyping reveals nanoplastic-induced dysfunction in zooplankton,”.</li>
+            <li>J. Dong, J. H. Kim, I. Pincus, S. Manna, J. M. Podgorski, <span class="me">Yanmin Zhu</span>, L. F. Tadesse, “Interplay of electrostatic interaction and steric repulsion between bacteria and gold surface influences Raman enhancement,”.</span></li>
+            <li>C. Wang, S. Zhu, N. Chen, J. Wu, S. Li, Y. Li, <span class="me">Yanmin Zhu</span>, R. Chen, Y. Zhang, E. Y. Lam, “Neuromorphic super-resolution for high-throughput imaging,”.
+            <li>S. Fang, <span class="me">Yanmin Zhu</span>, W. Wu, B. Jiang, T. Li, P. Li, Y. Xu, W. Yang, “Physically consistent latent space learning for embodied physical intuition,”.
+          </ol>
+        </div>
+
+        <!-- ===== CONFERENCE ===== -->
+        <div class="pgroup" data-g="conf">
+          <h3>Conference papers, invited talks &amp; seminars <span class="badge-year">SPIE · Optica · IEEE</span></h3>
+          <ol class="pubs">
+            <li><b>[Invited]</b> <span class="me">Yanmin Zhu</span>, “Differentiable imaging,” <span class="ve">SPIE Photonics West — AI and Optical Data Sciences VI</span>, Jan. 2025. <span class="jbadge note">Invited talk</span></li>
+            <li><b>[Invited]</b> <span class="me">Yanmin Zhu</span>, “HKU–KAUST Joint Postgraduate Workshop on Computational Imaging,” Dec. 2025. <span class="jbadge note">Invited talk</span></li>
+            <li><span class="me">Yanmin Zhu</span>, L. F. Tadesse, “Physical prior-informed deep generative model for spectroscopy transfer and material characterization,” <span class="ve">Proc. SPIE PC13333, Computational Optical Imaging and AI in Biomedical Sciences II</span>, PC1333314, Mar. 2025.</li>
+            <li><span class="me">Yanmin Zhu</span>, Y. Li, Y. Zhang, E. Y. Lam, “Super-resolution microsphere digital holographic microscopy imaging based on phase–intensity feature fusion,” <span class="ve">Proc. SPIE 13570, Multimodal Sensing and AI for Sustainable Future</span>, 135701V, 2025.</li>
+            <li>S. Li, <span class="me">Yanmin Zhu</span>, Y. Li, E. Y. Lam, “Fluorescence polarimetry for microplastics identification,” <span class="ve">Proc. SPIE 13719, Holography, Diffractive Optics, and Applications XV</span>, 137191G, 2025.</li>
+            <li>Y. Tian, R. Chen, <span class="me">Yanmin Zhu</span>, J. Chen, E. Y. Lam, “Coherent lensless diffraction imaging via multicore fiber for label-efficient microplastics discrimination,” <span class="ve">Proc. SPIE 13719</span>, 137191L, 2025.</li>
+            <li><b>[Invited]</b> Y. Li, J. Huang, <span class="me">Yanmin Zhu</span>, E. Y. Lam, “Monitoring microplastic and nanoplastic pollution with SPLASH,” <span class="ve">International Conference on Information Optics and Photonics</span>, Aug. 2024. <span class="jbadge note">Invited</span></li>
+            <li>J. Huang, Y. Li, <span class="me">Yanmin Zhu</span>, E. Y. Lam, “A field-deployable imaging system for detecting microplastics in the aquatic environment,” <span class="ve">IEEE International Symposium on Circuits and Systems (ISCAS)</span>, 1–5, 2024.</li>
+            <li><span class="me">Yanmin Zhu</span>, Y. Li, J. Huang, E. Y. Lam, “Material analysis with polarization holography and machine learning,” <span class="ve">Optica Digital Holography and Three-Dimensional Imaging</span>, JW2A.3, 2023.</li>
+            <li><span class="me">Yanmin Zhu</span>, Y. Li, J. Huang, Y. Zhang, E. Y. Lam, “Holographic and polarization feature analysis for microplastics characterization and water monitoring,” <span class="ve">SPIE Optical Metrology</span>, 12621-33, 2023.</li>
+            <li>J. Huang, <span class="me">Yanmin Zhu</span>, Y. Li, E. Y. Lam, “Polarization-sensitive digital holography for microplastic identification through scattering media,” <span class="ve">Optica Digital Holography and 3D Imaging</span>, HW3D.2, 2023.</li>
+            <li>Y. Li, <span class="me">Yanmin Zhu</span>, J. Huang, E. Y. Lam, “Polarization holographic imaging for high-throughput microplastic analysis,” <span class="ve">Optica Digital Holography and 3D Imaging</span>, JW2A.3, 2023.</li>
+            <li>Y. Zhang, J. Huang, <span class="me">Yanmin Zhu</span>, Y. Li, E. Y. Lam, “Quantifying particle volumes with photon-counting digital holography,” <span class="ve">Optica Digital Holography and 3D Imaging</span>, HW3D.1, 2023.</li>
+            <li>Y. Li, H. S. Kan, <span class="me">Yanmin Zhu</span>, V. Tam, A. Lee, E. Y. Lam, “An intelligent handheld device for early identification of meibomian gland irregularities,” <span class="ve">SPIE Ophthalmic Conference</span>, 2023.</li>
+            <li>Y. Li, H. S. Kan, <span class="me">Yanmin Zhu</span>, V. Tam, N. S. K. Fung, A. Lee, E. Y. Lam, “Automated analysis of meibomian gland irregularities using deep learning,” <span class="ve">American Academy of Ophthalmology (AAO)</span>, 2023.</li>
+            <li>Y. Li, P. W. Chiu, <span class="me">Yanmin Zhu</span>, Y. Cao, V. Tam, A. Lee, E. Y. Lam, “Monitoring the progress of subconjunctival hemorrhage through spectral reconstruction from RGB images,” <span class="ve">SPIE Photonics West</span>, 2023.</li>
+            <li>Y. Li, P. W. Chiu, <span class="me">Yanmin Zhu</span>, V. Tam, A. Lee, E. Y. Lam, “A deep-learning-enabled monitoring system for ocular redness assessment,” <span class="ve">IEEE Biomedical Circuits and Systems Conference (BioCAS)</span>, 58349X, 2023.</li>
+            <li>P. W. Chiu, Y. Li, <span class="me">Yanmin Zhu</span>, V. Tam, A. Lee, E. Y. Lam, “Deep learning-based system for assessing conjunctival injection and subconjunctival hemorrhage in red eye,” <span class="ve">Asia-Pacific Vitreo-retina Society</span>, 2023.</li>
+            <li><b>[Invited]</b> <span class="me">Yanmin Zhu</span>, H. K. Lo, C. H. Yeung, E. Y. Lam, “Zero-shot learning for holographic context analysis in microplastics probing,” <span class="ve">Optica Digital Holography and 3D Imaging</span>, W5A.41, 2022; HKU Research Seminar Series, Dec. 2022.</li>
+            <li><span class="me">Yanmin Zhu</span>, C. H. Yeung, E. Y. Lam, “Digital holography with polarization multiplexing for underwater imaging and descattering,” <span class="ve">IEEE International Workshop on Metrology for the Sea</span>, 219–223, 2021.</li>
+            <li><span class="me">Yanmin Zhu</span>, C. H. Yeung, E. Y. Lam, “Digital holographic microplastics detection and characterization in heterogeneous samples via deep learning,” <span class="ve">Proc. SPIE 12057, 12th ICOIP</span>, 120573G, 2021. <span class="jbadge note">Invited talk (ICOIP)</span></li>
+            <li><span class="me">Yanmin Zhu</span>, T. Zeng, K. Liu, Z. Ren, C. H. Yeung, E. Y. Lam, “Image descattering with synthetic polarization imaging and untrained network,” <span class="ve">Proc. SPIE 11898, Holography, Diffractive Optics and Applications XI</span>, 119–124, 2021.</li>
+            <li>Z. Ge, <span class="me">Yanmin Zhu</span>, Y. Zhang, E. Y. Lam, “Lens-free motion analysis using the event camera,” <span class="ve">Proc. SPIE 11901, Advanced Sensor Systems and Applications XI</span>, 131–136, 2021.</li>
+            <li><span class="me">Yanmin Zhu</span>, C. H. Yeung, E. Y. Lam, “Underwater holographic descattering with synthetic polarization,” <span class="ve">OSA Imaging and Applied Optics Congress — Digital Holography and 3D Imaging</span>, DTu6H.6, 2021.</li>
+            <li><span class="me">Yanmin Zhu</span>, C. H. Yeung, E. Y. Lam, “Digital holography with deep learning and generative adversarial networks for automatic microplastics classification,” <span class="ve">Proc. SPIE 11551, Holography, Diffractive Optics and Applications</span>, 115510B, 2020.</li>
+            <li><span class="me">Yanmin Zhu</span>, C. H. Yeung, E. Y. Lam, “Holographic classifier: deep learning in digital holography for automatic micro-object classification,” <span class="ve">IEEE International Conference on Industrial Informatics (INDIN)</span>, 516–520, 2020.</li>
+            <li><b>[Invited]</b> <span class="me">Yanmin Zhu</span>, C. H. Yeung, E. Y. Lam, “Automatic detection of microplastics by deep learning enabled digital holography,” <span class="ve">OSA Digital Holography and 3D Imaging</span>, HTu5B.1, 2020.</li>
+            <li><b>[Session Chair]</b> <span class="ve">Multimodal Sensing and Artificial Intelligence: Technologies and Applications</span>, SPIE Optical Metrology Symposium, Jun. 2023.</li>
+          </ol>
+        </div>
+      </div>
+    </section>
+
+    <!-- ---------- PATENTS ---------- -->
+    <section class="alt" id="patents">
+      <div class="wrap">
+        <div class="sec-head">
+          <div class="sec-kicker">Intellectual Property</div>
+          <h2>Patents &amp; technology translation<span class="rule"></span></h2>
+          <p class="sec-sub">Seven US patents / provisional applications underpinning two deep-tech ventures — <b>SpectroGen.AI</b> (generative spectroscopy software) and <b>Holosense Technology</b> (holographic sensing instruments).</p>
+        </div>
+        <div class="grid-2">
+          <div class="bl">
+            <h4>Granted / filed patents</h4>
+            <ul>
+              <li>Physical prior-informed generative modeling for cross-modality spectral prediction and interpretation — <b>USP 63/848063</b></li>
+              <li>Methods and apparatus for label-free photonic phenotyping of dynamic interfacial processes — <b>US IP01916</b></li>
+              <li>Apparatus and method for determining the concentration of nanoparticles in a liquid sample — <b>US IP01735</b></li>
+              <li>Method and apparatus for aquatic and airborne microplastic identification with polarized digital holography — <b>US 63/492,763</b></li>
+              <li>Method and apparatus for multi-modal polarization holographic spectrometry for material analysis — <b>US 63/516,228</b></li>
+              <li>Non-invasive automatic nanoparticle concentration measurement with forward dynamic speckle holography and multimodal AI — <b>IP01735</b></li>
+              <li>Apparatus and method for 4D polarization holography to assess nanoplastic impacts on aquatic microorganism behaviour — <b>IP01737</b></li>
+            </ul>
+          </div>
+          <div>
+            <div class="card" style="margin-bottom:16px">
+              <img class="company-photo spectrogen-photo" src="spectrogen.jpg" alt="SpectroGen.AI">
+              <h4>SpectroGen.AI &nbsp;<span class="pill pill-new">USA</span></h4>
+              <p><b>Co-founder &amp; CTO.</b> Commercialising the <i>Matter</i>-published “virtual spectrometer”: physics-informed generative AI that predicts and translates spectra across modalities for materials, pharma and semiconductor QC.</p>
+            </div>
+            <div class="card">
+              <img class="company-photo holosense-photo" src="holosense.jpg" alt="Holosense Technology Co. Ltd">
+              <h4>Holosense Technology Co. Ltd &nbsp;<span class="pill pill-new">Hong Kong</span></h4>
+              <p><b>Director &amp; CTO</b> (since Dec. 2024). Field-deployable holographic and polarimetric instruments for micro-/nano-plastic monitoring and label-free particle analytics — awarded a Geneva Silver Medal and an iCan Gold Medal.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ---------- AWARDS ---------- -->
+    <section id="">
+      <div class="wrap">
+        <div class="sec-head">
+          
+          <h2>Awards &amp; Honors<span class="rule"></span></h2>
+        </div>
+
+        <div class="tl">
+          <div class="tl-year">2025</div>
+          <div class="aw"><span class="m"><img src="award-young-pioneer.jpg" alt="Hong Kong SciTech Young Pioneer Award"></span><div><b>3<sup>rd</sup> Hong Kong SciTech Young Pioneer Award — Future Innovation Scientist</b><span>Y-LOT, Hong Kong — flagship recognition for emerging science &amp; technology leaders</span></div></div>
+          <div class="aw"><span class="m"><img src="award-hkis.jpg" alt="HKIS Young Scientist Award 2025 — Shortlist Award"></span><div><b>HKIS Young Scientist Award 2025 — Shortlist Award</b><span>Hong Kong Institution of Science</span></div></div>
+          <div class="tl-year">2024</div>
+          <div class="aw"><span class="m"><img src="award-geneva.jpg" alt="International Exhibition of Inventions of Geneva"></span><div><b>Silver Medal, 49<sup>th</sup> International Exhibition of Inventions of Geneva</b><span>The world’s foremost invention exhibition — for polarization holographic microplastic sensing</span></div></div>
+
+          <div class="tl-year">2023</div>
+          <div class="aw"><span class="m"><img src="award-ican.jpg" alt="International Invention Innovation Competition in Canada"></span><div><b>Gold Medal, International Invention Innovation Competition in Canada (iCan)</b></div></div>
+          <div class="aw"><span class="m"><img src="award-eee1997.jpg" alt="1973 EE Graduates 50<sup>th</sup> Anniversary Sustainability / Innovation Prize"></span><div><b>1973 EE Graduates 50<sup>th</sup> Anniversary Sustainability / Innovation Prize</b><span>Dept. of Electrical &amp; Electronic Engineering, HKU</span></div></div>
+          <div class="aw"><span class="m"><img src="award-26th-recognition.jpg" alt="26th Recognition Ceremony"></span><div><b>Awardee, 26<sup>th</sup> Recognition Ceremony</b><span>The University of Hong Kong</span></div></div>
+
+          <div class="tl-year">2022</div>
+          <div class="aw"><span class="m"><img src="award-greater-bay-area.jpg" alt="Greater Bay Area STEM Excellence Award"></span><div><b>Gold Prize, Greater Bay Area STEM Excellence Award</b></div></div>
+          <div class="aw"><span class="m"><img src="award-hkie.jpg" alt="HKIE Outstanding Paper Award"></span><div><b>HKIE Outstanding Paper Award for Young Engineers / Researchers (Shortlisted Paper)</b><span>The Hong Kong Institution of Engineers</span></div></div>
+          <div class="aw"><span class="m"><img src="award-hong-kong-ict.jpg" alt="Hong Kong ICT Awards 2022"></span><div><b>Hong Kong ICT Awards 2022 — Student Innovation Award</b></div></div>
+
+          <div class="tl-year">2021 · 2020</div>
+          <div class="aw"><span class="m"><img src="award-7th.jpg" alt="Hong Kong ICT Awards 2022"></span><div><b>Second Prize, 7<sup>th</sup> Hong Kong Innovation and Entrepreneurship Competition</b><span>Plus Merit Prize, 8<sup>th</sup> edition</span></div></div>
+          <div class="aw"><span class="m"><img src="award-6th.jpg" alt="Hong Kong ICT Awards 2022"></span><div><b>Second Prize, 6<sup>th</sup> Hong Kong Innovation and Entrepreneurship Competition</b><span>Plus Merit Prize, 8<sup>th</sup> edition</span></div></div>
+
+          <div class="tl-year">2019</div>
+          <div class="aw"><span class="m aw-icon"><svg class="fa"><use href="#trophy"></use></svg></span><div><b>Research Postgraduate Scholarship</b><span>The University of Hong Kong</span></div></div>
+
+          <div class="tl-year">2015 · 2014</div>
+          <div class="aw"><span class="m"><img src="award-national award.jpg" alt="Chinese National Scholarship"></span><div><b>Chinese National Scholarship</b><span>Ministry of Education, China — nation’s highest undergraduate honour</span></div></div>
+          <div class="aw"><span class="m aw-icon"><svg class="fa"><use href="#trophy"></use></svg></span><div><b>Pacemaker to Merit Student</b></div></div>
+          <div class="aw"><span class="m aw-icon"><svg class="fa"><use href="#trophy"></use></svg></span><div><b>Top-grade Special Class Scholarship (Top 1%, twice)</b></div></div>
+
+          
+        </div>
+      </div>
+    </section>
+
+    <!-- ---------- FUNDING ---------- -->
+    <section class="alt" id="funding">
+      <div class="wrap">
+        <div class="sec-head">
+          <div class="sec-kicker">Grants &amp; Projects</div>
+          <h2>Secured funding &amp; research programmes<span class="rule"></span></h2>
+        </div>
+        <div class="bl">
+          <h4>Funded projects (PI / key contributor)</h4>
+          <table>
+            <tbody><tr><td>AI for Pandemic Prevention: Energy- and Data-Efficient Machine Learning for Rapid Point-of-Need Diagnostics against Climate-Change-Induced Global Health Threats<br><span style="font-weight:400;color:var(--muted)">MIT–Google Research Fund</span></td><td><span class="money">USD 500,000</span><br>2023–2025</td></tr>
+            <tr><td>A Generative-AI-based Deep Speckle Holographic Platform for Accurate Nanoparticle Characterization<br><span style="font-weight:400;color:var(--muted)">HKU Seed Fund for Basic Research</span></td><td><span class="money">HKD 150,000</span><br>2024–2026</td></tr>
+            <tr><td>SweatLens: AI-Driven Holographic Sweat Analytics Wearable Device for Early Health Surveillance<br><span style="font-weight:400;color:var(--muted)">HSITP SPIN Fund</span></td><td><span class="money">HKD 150,000</span><br>2026–2027</td></tr>
+            
+          </tbody></table>
+        </div>
+        <div class="grid-2">
+          <div class="bl">
+            <h4>Ongoing research programmes — HKU</h4>
+            <ul>
+              <li><b>Intelligent Computational Optics for Combating Microplastics and Nanoplastics Pollution</b> (2024–present)</li>
+              <li><b>Enabling Lensless Low-Light Imaging with Computational Optical Imaging</b> (2022–present)</li>
+              <li><b>Smart Polarization Holography and AI for Material Discrimination and Physical Fingerprint Analysis</b> (2021–2023)</li>
+              <li><b>Intelligent Computational Diagnosis with Neural Networks</b> (2019–2022)</li>
+            </ul>
+          </div>
+          <div class="bl">
+            <h4>Earlier research training</h4>
+            <ul>
+              <li><b>Imperial College London</b> — Michelson interferometry and OCT for 3D and high-resolution image reconstruction (2018)</li>
+              <li><b>KU Leuven</b> — Intelligent gesture-touch evaluation for Alzheimer’s disease diagnosis and follow-up assessment (2017)</li>
+              <li><b>KU Leuven</b> — IoT design with short-distance high-speed LoRa communication (2016)</li>
+            </ul>
+          </div>
+        </div>
+        <div class="bl">
+          <h4>Project webpages</h4>
+          <ul>
+            <li><a class="project-link" href="https://www.eee.hku.hk/combatmp/index.html" target="_blank" rel="noopener">Optical and computational technologies to combat microplastics and nanoplastics pollution</a></li>
+            <li><a class="project-link" href="https://www.prototypesforhumanity.com/project/splash/" target="_blank" rel="noopener">SPLASH — smart polarization holography for microplastics identification and material analysis</a></li>
+            <li><a class="project-link" href="https://github.com/ymzhu19eee/dataset_microplastics" target="_blank" rel="noopener">Holographic Classifier — deep learning in digital holography for automatic micro-object classification</a></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ---------- SERVICE ---------- -->
+    <section id="service">
+      <div class="wrap">
+        <div class="sec-head">
+          <div class="sec-kicker">Professional Service</div>
+          <h2>Editorial, committee &amp; review roles<span class="rule"></span></h2>
+        </div>
+        <div class="grid-3">
+          <div class="card">
+            <h4>Editorial Boards</h4>
+            <ul>
+              <li><b>Editor</b> — <i>Frontiers in Lab on a Chip Technologies</i> (2026–present)</li>
+              <li><b>Editor</b> — <i>Photonics</i>, MDPI (2025–present)</li>
+            </ul>
+          </div>
+          <div class="card">
+            <h4>Committees &amp; Chairing</h4>
+            <ul>
+              <li><b>Program Committee</b> — 26<sup>th</sup> IEEE/ACM International Symposium on Cluster, Cloud and Internet Computing (CCGrid 2026)</li>
+              <li><b>Session Chair</b> — Multimodal Sensing and AI, SPIE Optical Metrology Symposium (2023)</li>
+            </ul>
+          </div>
+          <div class="card">
+            <h4>Memberships</h4>
+            <ul>
+              <li><b>Optica</b> (formerly OSA), 2020–present</li>
+              <li><b>SPIE</b>, 2020–present</li>
+              <li><b>HKIS</b>, 2022–present</li>
+            </ul>
+          </div>
+        </div>
+        <div class="bl" style="margin-top:18px">
+          <h4>Peer review for leading journals</h4>
+          <ul>
+            <li><b>Optica Publishing Group</b> (2021–present): <i>Optica</i>, <i>Optics Express</i>, <i>Applied Optics</i>, <i>OSA Continuum</i></li>
+            <li><b>ACS Publications</b> (2021–present): <i>ACS Photonics</i>, <i>Analytical Chemistry</i>, <i>ACS Nano</i></li>
+            <li><b>Springer Nature</b> (2025–present): <i>npj Clean Water</i>, <i>Scientific Reports</i></li>
+            <li><b>IEEE</b> (2019–present): <i>IEEE TCSVT</i>, <i>IEEE Transactions on Industrial Informatics</i>, <i>IEEE Journal of Oceanic Engineering</i></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ---------- TEACHING ---------- -->
+    <section class="alt" id="teaching">
+      <div class="wrap">
+        <div class="sec-head">
+          <div class="sec-kicker">Teaching &amp; Mentorship</div>
+          <h2>Educating the next generation<span class="rule"></span></h2>
+        </div>
+        <div class="grid-2">
+          <div class="bl">
+            <h4>Courses at The University of Hong Kong</h4>
+            <ul>
+              <li><b>ELEC6008 / ELEC8107</b> — Pattern Recognition and Machine Learning (RPg), 2026–present</li>
+              <li><b>ELEC7078</b> — Advanced Topics in EEE: Biomedical Intelligence for Imaging and Informatics (PhD), 2026</li>
+              <li><b>ELEC6604</b> — Neural Networks, Fuzzy Systems and Genetic Algorithms (PhD), 2021–2023</li>
+              <li><b>ELEC3848 / 3848B/C</b> — Integrated Design Project (UG), 2019–2021</li>
+              <li><b>ELEC4848</b> — Senior Year Project, 2025–present</li>
+            </ul>
+            <p style="margin-top:12px;font-size:13.5px;color:var(--muted)"><b>Certification in Teaching and Learning in Higher Education</b>, 2020</p>
+          </div>
+          <div class="bl">
+            <h4>Mentored students &amp; interns</h4>
+            <ul>
+              <li>Xi Zeng — <b>UC Davis</b> (2026)</li>
+              <li>Hongi Siu, Sike Jia — <b>Tsinghua University</b> (2025)</li>
+              <li>Jinkun Chen — <b>Sun Yat-sen University</b></li>
+              <li>Jiaying Zhu, Binghao Chen, Weiyi Chen, Chun Kit Li, Kai Yuen Kelvin Lam, Jiarui Hu — <b>The University of Hong Kong</b> (2025)</li>
+            </ul>
+            <p style="margin-top:12px;font-size:13.5px;color:var(--ink-soft)">Mentees have co-authored papers in <i>ACS Photonics</i>, <i>Optics Express</i>, <i>Scientific Reports</i> and SPIE/Optica proceedings, and have won innovation-competition prizes.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ---------- CONTACT ---------- -->
+    <section class="contact" id="contact">
+      <div class="wrap">
+        <div class="sec-head">
+          <div class="sec-kicker">Contact &amp; Join Us</div>
+          <h2>Let’s build the next generation of imaging<span class="rule"></span></h2>
+        </div>
+        <div class="cgrid">
+          <div class="cbox">
+            <h4>Openings</h4>
+            <p>I am actively recruiting <b>PhD students, postdoctoral fellows, research assistants and visiting/interning students</b> to work on:</p>
+            <ul>
+              <li>Physics-informed &amp; generative AI for imaging and spectroscopy</li>
+              <li>Holographic, polarimetric and speckle-based optical instruments</li>
+              <li>Wearable / edge-AI biomedical and environmental sensing</li>
+              <li>Programmable optical computing systems, metasurface design, diffractive neural networks</li>
+              
+            </ul>
+            <p style="margin-top:12px">Backgrounds welcome: optics/photonics, electrical engineering, computer science, biomedical engineering, applied physics, materials.<br>
+            Please email your <b>CV, transcripts and a short statement of interest</b> to <a href="mailto:ymzhu@hku.hk">ymzhu@hku.hk</a>.</p>
+          </div>
+          <div class="cbox">
+            <h4>Contact</h4>
+            <p>
+              <b>Prof. Yanmin Zhu</b><br>
+              Room R512, Chow Yei Ching Building<br>
+              The University of Hong Kong, Pokfulam, Hong Kong SAR<br><br>
+              Email: <a href="mailto:ymzhu@hku.hk">ymzhu@hku.hk</a> &nbsp;|&nbsp; <a href="mailto:vicymzhu@gmail.com">vicymzhu@gmail.com</a><br>
+            </p>
+            <p style="margin-top:14px">
+              <a class="btn btn-ghost" style="font-size:12.5px;padding:8px 16px" href="https://scholar.google.com/" target="_blank" rel="noopener">Google Scholar</a>
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      © <span id="yr">2026</span> Yanmin Zhu · Department of Electrical and Computer Engineering &amp; School of Biomedical Engineering, The University of Hong Kong ·
+      <a href="#top" style="color:#ffd98a">Back to top ↑</a>
+    </footer>
+
+  </main>
+</div>
+
+<script>
+/* ---------- year ---------- */
+document.getElementById('yr').textContent = new Date().getFullYear();
+
+/* ---------- count-up stats ---------- */
+(function(){
+  var seen=false;
+  function run(){
+    if(seen) return; seen=true;
+    document.querySelectorAll('.stat .n').forEach(function(el){
+      var to=+el.dataset.to, cur=0, step=Math.max(1,Math.round(to/28));
+      el.textContent='0';
+      var t=setInterval(function(){
+        cur+=step;
+        if(cur>=to){cur=to;clearInterval(t);el.textContent=cur+'+';}
+        else el.textContent=cur;
+      },28);
+    });
+  }
+  var bar=document.querySelector('.stats');
+  if('IntersectionObserver' in window){
+    new IntersectionObserver(function(e){ if(e[0].isIntersecting) run(); },{threshold:.35}).observe(bar);
+  } else run();
+})();
+
+/* ---------- publication filters ---------- */
+document.querySelectorAll('.filters button').forEach(function(b){
+  b.addEventListener('click',function(){
+    document.querySelectorAll('.filters button').forEach(function(x){x.classList.remove('on')});
+    b.classList.add('on');
+    var f=b.dataset.f;
+    document.querySelectorAll('.pgroup').forEach(function(g){
+      g.style.display = (f==='all'||g.dataset.g===f) ? '' : 'none';
+    });
+  });
+});
+
+/* ---------- sidebar scroll-spy ---------- */
+(function(){
+  var links=[].slice.call(document.querySelectorAll('nav.side-nav a'));
+  var secs=links.map(function(a){return document.querySelector(a.getAttribute('href'))}).filter(Boolean);
+  function spy(){
+    var y=window.scrollY+120, idx=-1;
+    secs.forEach(function(s,i){ if(s.offsetTop<=y) idx=i; });
+    links.forEach(function(a,i){ a.classList.toggle('active', i===idx); });
+  }
+  window.addEventListener('scroll',spy,{passive:true}); spy();
+})();
+</script>
+
+
+</body></html>
